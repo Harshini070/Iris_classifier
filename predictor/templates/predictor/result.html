@@ -1,0 +1,136 @@
+<!-- predictor/templates/predictor/result.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <style>
+        /* Reset padding and margins */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Background styling with blur */
+        body {
+            font-family: Arial, sans-serif;
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        /* Background container to add blur */
+        .background-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("{% static 'images/background_flower.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px); /* Apply blur */
+            z-index: -1;
+        }
+
+        /* Container for the result */
+        .result-container {
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        /* Button styling */
+        .btn {
+            background-color: #3c3e3c;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #171917;
+        }
+
+        /* Styling for the link */
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        
+
+        /* Image styling and centering */
+        .flower-image-container {
+            display: flex;
+            justify-content: center; /* Centers the image horizontally */
+            align-items: center;     /* Centers the image vertically */
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        .flower-image {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Background blur container -->
+<div class="background-blur"></div>
+
+<div class="result-container">
+    <h2>Prediction Result</h2>
+    <p>The predicted species is: <strong>{{ predicted_species }}</strong></p>
+
+    <!-- Display flower image based on prediction -->
+    <div class="flower-image-container">
+        {% if predicted_species == "Setosa" %}
+            <img src="{% static 'images/setosa.png' %}" alt="Setosa" class="flower-image">
+        {% elif predicted_species == "Versicolor" %}
+            <img src="{% static 'images/versicolor.png' %}" alt="Versicolor" class="flower-image">
+        {% elif predicted_species == "Virginica" %}
+            <img src="{% static 'images/virginica.png' %}" alt="Virginica" class="flower-image">
+        {% endif %}
+    </div>
+
+    <!-- Link to make another prediction -->
+    <a href="{% url 'predict' %}" class="btn">Make another prediction</a>
+</div>
+
+</body>
+</html>

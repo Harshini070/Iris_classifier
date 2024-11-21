@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}  <!-- Load static files -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Iris Species</title>
+    <style>
+        /* Reset padding and margins */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Background container to add blur */
+        .background-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("{% static 'images/background_flower.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px); /* Adjust blur strength */
+            z-index: -1;
+        }
+
+        /* Center content on top of blurred background */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Container for form and image box side by side */
+        .content-container {
+            display: flex;
+            gap: 20px; /* Space between form and image */
+            align-items: flex-start;
+        }
+
+        /* Semi-transparent overlay for the form */
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            width: 320px;
+        }
+
+        /* Header with enhanced color and font */
+        h2 {
+            text-align: center;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Label and input field styling */
+        label {
+            font-weight: bold;
+            color: #444;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #4CAF50;
+        }
+
+        /* Button styling */
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #3b3c3b;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #1b1c1b;
+        }
+
+        /* Image box styling with white background to match form container size */
+        .image-box {
+            width: 320px; /* Match form container width */
+            height: 470px; /* Adjusted height to match form height */
+            background-color: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 4px solid rgb(162, 159, 159); /* White border around the image */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Background blur container -->
+<div class="background-blur"></div>
+
+<!-- Container to hold form and image side by side -->
+<div class="content-container">
+    <div class="form-container">
+        <h2>Predict Iris Species</h2>
+        
+        <form method="post">
+            {% csrf_token %}
+            <label>Sepal Length:</label>
+            <input type="text" name="sepal_length" required>
+
+            <label>Sepal Width:</label>
+            <input type="text" name="sepal_width" required>
+
+            <label>Petal Length:</label>
+            <input type="text" name="petal_length" required>
+
+            <label>Petal Width:</label>
+            <input type="text" name="petal_width" required>
+            <p>*Give the input in cm.</p>
+            <button type="submit">Predict</button>
+        </form>
+    </div>
+
+    <!-- Image box beside the form -->
+    <div class="image-box">
+        <img src="{% static 'images/flower_details.png' %}" alt="Iris flower" class="gallery-image">
+    </div>
+</div>
+
+</body>
+</html>
