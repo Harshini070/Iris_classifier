@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-irxf!2o4j459r-6=z^)gjh1is32tr*8us!z*)xrf8c%c^0$y41
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.onrender.com','127.0.0.1']
+ALLOWED_HOSTS = ['Iris_classifier.onrender.com',"localhost"]
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
